@@ -23,30 +23,32 @@ class Upload extends Component {
     });
   };
 
-  updateData = (result) => {
-    var data = result.data;
-    console.log(data);
-  }
+  // updateData = (result) => {
+  //   var data = result.data;
+  //   console.log(data);
+  // }
 
-  onClickHandler = async () => {
+  updateData = async (result) => {
+    let data = result.data;
+   console.log(data);
 
     let options = {
       method: 'POST',
-      body: formData
+      headers: {'Content-type': 'application/json'},
+      body: JSON.stringify(data)
     }
 
     try {
-      const response = await fetch("http://localhost:3001/fileupload", options)
+      const response = await fetch("http://localhost:3001/upload", options)
       if(!response.ok) { throw new Error(`Fetch Call Cannot Be Made`)}
-      await response.json();
+      let dataResponse = await response.json();
+      console.log(dataResponse);
     } catch (error) {
       console.log('error', error.message);
     }
   }
 
   render() {
-   console.log("Render File data: ",this.state.csvfile);
-
     return (
       <div className="container">
         <label>Upload Your File </label>
