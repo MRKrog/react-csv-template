@@ -1,7 +1,7 @@
 # MKrog React Template
 
 ## Overview:
-This is my react template that I am always changing and updating!
+This is a react csv template, upload your own csv and it will convert to json to then store in a database
 
 ## Preview:
 <!-- ![Homepage Preview](src/images/Homepage.png) -->
@@ -11,7 +11,6 @@ This is my react template that I am always changing and updating!
 These instructions will get a copy of the project up and running on your local machine for usage and testing purposes.
 
 ### Frontend
-clone down the repo: ```$ git clone https://github.com/MRKrog/mk-template```
 
 cd into directory and run npm install: ```$ npm install```
 
@@ -23,9 +22,6 @@ Palette Picker was built using:
 - [React.js](https://reactjs.org/)
 - [Redux.js](https://redux.js.org/)
 - [SCSS](https://sass-lang.com/)
-
-And tested using:
-- [Enzyme](https://airbnb.io/enzyme/) & [Jest](https://airbnb.io/enzyme/docs/guides/jest.html)
 
 ## Contributors
 - [Michael Krog](https://github.com/MRKrog)

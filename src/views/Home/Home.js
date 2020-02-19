@@ -1,4 +1,5 @@
 import React from 'react';
+import MyDropzone from '../../containers/MyDropzone'
 // import { connect } from "react-redux";
 // import * as actions from "../../redux/actions";
 
@@ -6,9 +7,7 @@ const Home = () => {
   return (
     <div className="Home">
       <header className="Home-header">
-        <p>
-          This is Home.
-        </p>
+        <MyDropzone />
       </header>
     </div>
   )
