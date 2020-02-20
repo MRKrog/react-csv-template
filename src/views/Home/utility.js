@@ -1,23 +1,40 @@
 
 export const productUpdater = (data) => {
   // sort products from 1 down
-  // 
+  // first product create array then all variants push into same array
+  // return array into formatted
+  let productsSorted = data.sort((a,b) => (a['Product_ID'] - b['Product_ID']))
 
-  console.log('in product updater', data);
-  let formatted = [];
+  console.log(productsSorted);
 
-  let splitData = data.reduce((acc, prod) => {
-
-    console.log(prod);
-    if(true) {
-
+  let productsOrganized = productsSorted.reduce((acc, prod) => {
+    // console.log(prod);
+    if (!acc[prod['Product_ID']]) {
+      acc[prod['Product_ID']] = [];
     }
-    return acc
-  }, [])
+    if(prod['Price'].length > 0) {
+      acc[prod['Product_ID']].push(prod);
+    }
 
-  return splitData;
+    return acc;
+  }, {});
+
+  return productsOrganized;
 }
 
+// 
+// const hanldeOrganize = (products) => {
+//     let productsSorted = products.reduce((acc, prod) => {
+//       if (!acc[prod['product_id']]) { acc[prod['product_id']] = []; }
+//       acc[prod['product_id']].push(prod);
+//       return acc;
+//     }, {});
+//
+//     return Object.keys(productsSorted).reduce((acc, groupedProducts) => {
+//         acc.push(productsSorted[groupedProducts])
+//         return acc
+//     }, []);
+//  }
 
 
     // let topProducts = productSort.sort((a, b) => {
