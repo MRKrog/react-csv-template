@@ -3,6 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/core": "^4.9.3",
+    "@material-ui/icons": "^4.9.1",
     "csvtojson": "^2.0.10",
     "node-sass": "^4.13.0",
     "papaparse": "^5.1.1",
