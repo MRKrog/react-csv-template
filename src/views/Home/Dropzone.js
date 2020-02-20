@@ -1,25 +1,11 @@
 import React, { useCallback, useMemo, useState } from 'react';
+import { productUpdater } from './utility';
 import { useDropzone } from 'react-dropzone';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import DescriptionIcon from '@material-ui/icons/Description';
 
 import Papa from 'papaparse';
 
-const baseStyle = {
-  // flex: 1,
-  // display: 'flex',
-  // flexDirection: 'column',
-  // alignItems: 'center',
-  // padding: '20px',
-  // borderWidth: 2,
-  // borderRadius: 2,
-  // borderColor: '#eeeeee',
-  // borderStyle: 'dashed',
-  // backgroundColor: '#fafafa',
-  // color: '#bdbdbd',
-  // outline: 'none',
-  // transition: 'border .24s ease-in-out'
-};
 
 const activeStyle = {
   borderColor: '#000000'
@@ -33,11 +19,13 @@ const rejectStyle = {
   borderColor: '#ff1744'
 };
 
-const Dropzone = () => {
+const DropzoneCustom = () => {
   const [file, setFile] = useState(null)
   const [fileLoaded, setFileLoaded] = useState(false)
 
   const onDrop = useCallback(acceptedFiles => {
+    console.log('acceptedFiles', acceptedFiles);
+
     Papa.parse(acceptedFiles[0], {
       header: true,
       complete: updateData
@@ -50,10 +38,10 @@ const Dropzone = () => {
     isDragActive,
     isDragAccept,
     isDragReject,
+    acceptedFiles
   } = useDropzone({ accept: 'text/csv', noClick: false, onDrop });
 
   const style = useMemo(() => ({
-    ...baseStyle,
     ...(isDragActive ? activeStyle : {}),
     ...(isDragAccept ? acceptStyle : {}),
     ...(isDragReject ? rejectStyle : {})
@@ -65,10 +53,24 @@ const Dropzone = () => {
   const submitFile = (e) => {
     e.preventDefault();
     console.log('button clicked');
+    productUpdater('testing')
   }
+
+  const removeFile = (file) => () => {
+    console.log('removeFile...')
+    acceptedFiles.splice(acceptedFiles.indexOf(file), 1)
+    console.log(acceptedFiles)
+  }
+
+  const files = acceptedFiles.map(file => (
+    <li key={file.path}>
+      {file.path} - {file.size} bytes <button onClick={removeFile(file)}>Remove File</button>
+    </li>
+  ));
 
   const updateData = async (result) => {
     let data = result.data;
+    setFileLoaded(true)
     console.log(data);
 
     // let options = {
@@ -92,11 +94,18 @@ const Dropzone = () => {
   return (
     <div className="container">
       <section className="File-DropContainer">
+
         <div className="File-Drop" {...getRootProps({style})}>
           <input {...getInputProps()} />
           <CloudUploadIcon style={{ fontSize: 80 }}  />
           <h4>Drag 'n' drop some file here</h4>
         </div>
+
+        <aside>
+          <h4>Files</h4>
+          <ul>{files}</ul>
+        </aside>
+
       </section>
       <button className="ButtonLoad"
              onClick={submitFile}
@@ -107,7 +116,7 @@ const Dropzone = () => {
   )
 }
 
-export default Dropzone
+export default DropzoneCustom
 //
 // {
 //   "_index": "product_variant_shopify",

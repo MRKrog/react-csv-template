@@ -18,6 +18,8 @@
   margin-bottom: 1em;
   border-radius: 2px;
   box-shadow: 1px 2px 4px 0px #000000cc;
+  width: 359px;
+  // height: 179px;
 }
 
 .File-Drop {
@@ -44,12 +46,38 @@
     font-weight: 100;
     font-family: 'Roboto';
   }
+
+  em {
+    font-weight: 400;
+    font-size: 14px;
+    padding-top: 5px;
+  }
 }
+
+
+.FileReady {
+  display: flex;
+  align-items: center;
+
+  button {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    line-height: 0;
+
+    svg {
+      color: #585858;
+      font-size: 18px;
+    }
+  }
+
+}
+
 
 .ButtonLoad {
   display: flex;
   cursor: pointer;
-  // font-family: $fontAbel;
   font-weight: 300;
   width: 100%;
   background: #2196F3;
@@ -66,4 +94,9 @@
   text-decoration: none;
   justify-content: center;
   border: none;
+
+
+  &[disabled] {
+    pointer-events: none;
+  }
 }

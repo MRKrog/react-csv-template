@@ -1,12 +1,12 @@
 import React from 'react';
-import Dropzone from './Dropzone'
+import DropzoneCustom from './DropzoneCustom'
 // import { connect } from "react-redux";
 // import * as actions from "../../redux/actions";
 
 const Home = () => {
   return (
     <div className="Home">
-      <Dropzone />
+      <DropzoneCustom />
     </div>
   )
 }
