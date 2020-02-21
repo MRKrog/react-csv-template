@@ -9,17 +9,15 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-
 }
 
-.File-DropContainer {
+.DropContainer {
   background-color: #ececec;
   padding: 5px;
   margin-bottom: 1em;
   border-radius: 2px;
   box-shadow: 1px 2px 4px 0px #000000cc;
   width: 359px;
-  // height: 179px;
 }
 
 .File-Drop {
@@ -36,10 +34,7 @@
   justify-content: center;
   cursor: pointer;
 
-  svg {
-    font-size: 80px;
-    color: #2196F3;
-  }
+
 
   h4 {
     margin: 0;
@@ -54,25 +49,60 @@
   }
 }
 
-
-.FileReady {
+.File-Section {
   display: flex;
+  flex-direction: column;
+  text-align: center;
   align-items: center;
+  justify-content: center;
 
-  button {
-    background: none;
-    border: none;
-    outline: none;
-    cursor: pointer;
-    line-height: 0;
-
+  &.Ready {
     svg {
-      color: #585858;
-      font-size: 18px;
+      color: #2196F3;
+    }
+  }
+
+  &.Dragging {
+    svg {
+      color: #00BD06;
+    }
+  }
+
+  &.Rejected {
+    svg {
+      color: #404040;
+    }
+  }
+
+  &.Loaded {
+    svg {
+      color: #2196F3;
+    }
+  }
+
+  .loaded-copy {
+    display: flex;
+    align-items: center;
+
+    button {
+      background: none;
+      border: none;
+      outline: none;
+      cursor: pointer;
+      line-height: 0;
+      margin-top: 6px;
+
+      svg {
+        color: #585858;
+        font-size: 18px;
+      }
     }
   }
 
 }
+
+
+
 
 
 .ButtonLoad {
@@ -94,7 +124,6 @@
   text-decoration: none;
   justify-content: center;
   border: none;
-
 
   &[disabled] {
     pointer-events: none;

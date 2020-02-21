@@ -3,6 +3,7 @@ export const productUpdater = (data) => {
   // sort products from 1 down
   // first product create array then all variants push into same array
   // return array into formatted
+  // let productsSorted = data.sort((a,b) =>  (a['Price'] - b['Price']))
   let productsSorted = data.sort((a,b) => (a['Product_ID'] - b['Product_ID']))
 
   console.log(productsSorted);
@@ -22,7 +23,7 @@ export const productUpdater = (data) => {
   return productsOrganized;
 }
 
-// 
+//
 // const hanldeOrganize = (products) => {
 //     let productsSorted = products.reduce((acc, prod) => {
 //       if (!acc[prod['product_id']]) { acc[prod['product_id']] = []; }

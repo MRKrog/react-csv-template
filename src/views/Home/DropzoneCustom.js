@@ -25,7 +25,6 @@ const DropzoneCustom = () => {
   const [fileTitle, setfileTitle] = useState('')
 
   const onDrop = useCallback(acceptedFiles => {
-    // console.log('>>>acceptedFiles', rejectedFiles);
 
     setfileTitle(acceptedFiles[0].name)
 
@@ -105,7 +104,7 @@ const DropzoneCustom = () => {
                       <BackspaceIcon />
                     </button>
                   </div>
-                  <em>Submit your custom products below</em>
+                  <em>(Submit your custom products below)</em>
                 </>
               )
             }
