@@ -1,18 +1,21 @@
+import uniqid from 'uniqid';
+import * as moment from 'moment';
 
 export const productUpdater = (data) => {
-  // sort products from 1 down
-  // first product create array then all variants push into same array
-  // return array into formatted
-  // let productsSorted = data.sort((a,b) =>  (a['Price'] - b['Price']))
+  let newId = uniqid('hello-');
+  let now = moment().format();
+
+  console.log('>>>>id', newId);
+  console.log('>>>>now', now);
+
   let productsSorted = data.sort((a,b) => (a['Product_ID'] - b['Product_ID']))
 
-  console.log(productsSorted);
-
   let productsOrganized = productsSorted.reduce((acc, prod) => {
-    // console.log(prod);
+
     if (!acc[prod['Product_ID']]) {
       acc[prod['Product_ID']] = [];
     }
+
     if(prod['Price'].length > 0) {
       acc[prod['Product_ID']].push(prod);
     }
@@ -21,6 +24,23 @@ export const productUpdater = (data) => {
   }, {});
 
   return productsOrganized;
+}
+
+
+let productTemplate = {
+  _id: '',
+  _index: 'product_variant_custom',
+  _type: '_doc',
+  levar_user_account_id: '',
+  product_title: '',
+  product_type: '',
+  product_vendor: '',
+  price: 0,
+  image_url: {
+    src: ''
+  },
+  created_at: "2019-11-05T20:09:02-06:00",
+  shopify_asset_status: false,
 }
 
 //

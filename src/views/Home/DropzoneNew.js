@@ -1,20 +1,10 @@
 import React, { useState } from 'react';
+import { productUpdater } from './utility';
 import Dropzone from 'react-dropzone';
+import Papa from 'papaparse';
 import CloudUploadIcon from '@material-ui/icons/CloudUpload';
 import DescriptionIcon from '@material-ui/icons/Description';
 import BackspaceIcon from '@material-ui/icons/Backspace';
-
-const activeStyle = {
-  borderColor: '#000000'
-};
-
-const acceptStyle = {
-  borderColor: '#2196F3'
-};
-
-const rejectStyle = {
-  borderColor: '#ff1744'
-};
 
 const DropzoneNew = () => {
   const [csvFile, setFile] = useState([])
@@ -23,8 +13,22 @@ const DropzoneNew = () => {
   const onDrop = (acceptedFiles) => {
     if(acceptedFiles.length > 0){
       setfileTitle(acceptedFiles[0].name)
-      setFile([...acceptedFiles]);
+      formatFile(acceptedFiles[0])
     }
+  }
+
+  const formatFile = (file) => {
+    Papa.parse(file, {
+      header: true,
+      complete: updateData
+    });
+  }
+
+  const updateData = (result) => {
+    let { data } = result;
+    let updatedProducts = productUpdater(data)
+    console.log('updatedProducts', updatedProducts);
+    setFile([updatedProducts])
   }
 
   const submitFile = async () => {
@@ -94,13 +98,12 @@ const DropzoneNew = () => {
 
     </div>
 
-    <button className="ButtonLoad"
+    <button className={csvFile.length > 0 ? 'ButtonLoad enabled' : 'ButtonLoad disabled'}
            onClick={submitFile}
            disabled={csvFile.length > 0 ? false : true}>
            Submit
     </button>
   </div>
-
   );
 }
 

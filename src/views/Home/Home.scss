@@ -21,32 +21,7 @@
 }
 
 .File-Drop {
-  display: flex;
-  padding: 1em;
-  text-align: center;
-  flex-direction: column;
-  border: 3px dashed #bbbbbb;
-  transition: border .24s ease-in-out;
-  background-color: #ececec;
   outline: none;
-  color: #bdbdbd;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-
-
-
-  h4 {
-    margin: 0;
-    font-weight: 100;
-    font-family: 'Roboto';
-  }
-
-  em {
-    font-weight: 400;
-    font-size: 14px;
-    padding-top: 5px;
-  }
 }
 
 .File-Section {
@@ -55,55 +30,77 @@
   text-align: center;
   align-items: center;
   justify-content: center;
+  padding: 1em;
+  border: 3px dashed #bbbbbb;
+  transition: border .24s ease-in-out;
+  background-color: #ececec;
+  outline: none;
+  color: #bdbdbd;
+
+  em {
+    font-weight: 400;
+    font-size: 14px;
+    padding-top: 5px;
+  }
+
+  h4 {
+    margin: 0;
+    font-weight: 100;
+    font-family: 'Roboto';
+  }
 
   &.Ready {
+    cursor: pointer;
+
     svg {
       color: #2196F3;
     }
   }
 
   &.Dragging {
+    border-color: #00BD06;
+
     svg {
       color: #00BD06;
     }
   }
 
   &.Rejected {
+    border-color: #ff1744;
+
     svg {
-      color: #404040;
+      color: #ff1744;
     }
   }
 
   &.Loaded {
+    border-color: #2196F3;
+
     svg {
       color: #2196F3;
     }
-  }
 
-  .loaded-copy {
-    display: flex;
-    align-items: center;
+    .loaded-copy {
+      display: flex;
+      align-items: center;
 
-    button {
-      background: none;
-      border: none;
-      outline: none;
-      cursor: pointer;
-      line-height: 0;
-      margin-top: 6px;
+      button {
+        background: none;
+        border: none;
+        outline: none;
+        cursor: pointer;
+        line-height: 0;
+        margin-top: 6px;
 
-      svg {
-        color: #585858;
-        font-size: 18px;
+        svg {
+          color: #585858;
+          font-size: 18px;
+        }
       }
     }
   }
 
 }
-
-
-
-
 
 .ButtonLoad {
   display: flex;
@@ -124,6 +121,15 @@
   text-decoration: none;
   justify-content: center;
   border: none;
+  outline: none;
+
+  &.enabled {
+    opacity: 1;
+  }
+
+  &.disabled {
+    opacity: .5;
+  }
 
   &[disabled] {
     pointer-events: none;
