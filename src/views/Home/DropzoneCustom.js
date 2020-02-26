@@ -73,14 +73,14 @@ const DropzoneCustom = () => {
     //   body: JSON.stringify(data)
     // }
     //
-    // try {
-    //   const response = await fetch("http://localhost:3001/upload", options)
-    //   if(!response.ok) { throw new Error(`Fetch Call Cannot Be Made`)}
-    //   let dataResponse = await response.json();
-    //   console.log(dataResponse);
-    // } catch (error) {
-    //   console.log('error', error.message);
-    // }
+    try {
+      const response = await fetch("http://localhost:3001/upload", options)
+      if(!response.ok) { throw new Error(`Fetch Call Cannot Be Made`)}
+      let dataResponse = await response.json();
+      console.log(dataResponse);
+    } catch (error) {
+      console.log('error', error.message);
+    }
   }
 
   return (

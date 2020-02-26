@@ -32,9 +32,24 @@ const DropzoneNew = () => {
   }
 
   const submitFile = async () => {
-    console.log('clicked submit');
-    console.log('>>>csv file', csvFile);
-    console.log('>>>title', fileTitle)
+
+    let options = {
+      method: 'PUT',
+      headers: {'Content-type': 'application/json'},
+      body: JSON.stringify(csvFile)
+    }
+
+    // let url = "https://jy0ub3ldsk.execute-api.us-east-1.amazonaws.com/dev/upload"
+    let url = "http://localhost:3001/upload"
+
+    try {
+      const response = await fetch(url, options)
+      if(!response.ok) { throw new Error(`Fetch Call Cannot Be Made`)}
+      let dataResponse = await response.json();
+      console.log(dataResponse);
+    } catch (error) {
+      console.log('error', error.message);
+    }
   }
 
   const removeFile = () => {
@@ -45,57 +60,51 @@ const DropzoneNew = () => {
   return (
     <div className="container">
       <div className="DropContainer">
+        <Dropzone onDrop={onDrop}
+                  accept="text/csv"
+                  multiple={false}>
+          {({getRootProps, getInputProps, isDragActive, isDragReject}) => (
+            <div className="File-Drop" {...getRootProps()}>
 
-      <Dropzone onDrop={onDrop}
-                accept="text/csv"
-                multiple={false}>
-        {({getRootProps, getInputProps, isDragActive, isDragReject}) => (
-          <div className="File-Drop" {...getRootProps()}>
-
-            {!isDragActive && csvFile.length < 1 && (
-              <section className="File-Section Ready">
-                <input {...getInputProps()} />
-                <CloudUploadIcon style={{ fontSize: 80 }} />
-                <h4>Drag 'n' Drop File Here</h4>
-                <em>(Only *.csv files will be accepted)</em>
-              </section>
-            )}
-
-            { isDragActive && !isDragReject && (
-              <section className="File-Section Dragging">
-                <input {...getInputProps()} />
-                <CloudUploadIcon style={{ fontSize: 80 }} />
-                <h4>Accepted File Type</h4>
-                <em>(Only *.csv files will be accepted)</em>
-              </section>
-            )}
-
-            { isDragReject && (
-              <section className="File-Section Rejected">
-                <input {...getInputProps()} />
-                <CloudUploadIcon style={{ fontSize: 80 }} />
-                <h4>File Type Not Allowed</h4>
-                <em>(Only *.csv files will be accepted)</em>
-              </section>
-            )}
-
-            { csvFile.length > 0 && (
-                <section className="File-Section Loaded">
-                  <DescriptionIcon style={{ fontSize: 80 }} />
-                  <div className="loaded-copy">
-                    <h4>{fileTitle}</h4>
-                    <button className="Remove-File" onClick={removeFile}>
-                      <BackspaceIcon />
-                    </button>
-                  </div>
-                  <em>(Submit your custom products below)</em>
+              {!isDragActive && csvFile.length < 1 && (
+                <section className="File-Section Ready">
+                  <input {...getInputProps()} />
+                  <CloudUploadIcon style={{ fontSize: 80 }} />
+                  <h4>Drag 'n' Drop File Here</h4>
+                  <em>(Only *.csv files will be accepted)</em>
                 </section>
               )}
-
-          </div>
-        )}
-      </Dropzone>
-
+              { isDragActive && !isDragReject && (
+                <section className="File-Section Dragging">
+                  <input {...getInputProps()} />
+                  <CloudUploadIcon style={{ fontSize: 80 }} />
+                  <h4>Accepted File Type</h4>
+                  <em>(Only *.csv files will be accepted)</em>
+                </section>
+              )}
+              { isDragReject && (
+                <section className="File-Section Rejected">
+                  <input {...getInputProps()} />
+                  <CloudUploadIcon style={{ fontSize: 80 }} />
+                  <h4>File Type Not Allowed</h4>
+                  <em>(Only *.csv files will be accepted)</em>
+                </section>
+              )}
+              { csvFile.length > 0 && (
+                  <section className="File-Section Loaded">
+                    <DescriptionIcon style={{ fontSize: 80 }} />
+                    <div className="loaded-copy">
+                      <h4>{fileTitle}</h4>
+                      <button className="Remove-File" onClick={removeFile}>
+                        <BackspaceIcon />
+                      </button>
+                    </div>
+                    <em>(Submit your custom products below)</em>
+                  </section>
+                )}
+            </div>
+          )}
+        </Dropzone>
     </div>
 
     <button className={csvFile.length > 0 ? 'ButtonLoad enabled' : 'ButtonLoad disabled'}

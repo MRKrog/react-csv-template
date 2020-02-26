@@ -24,14 +24,14 @@ export const productUpdater = (data) => {
   let allProducts = prodSorted.reduce((acc, prod) => {
 
     let prodTemp = {
+      _id: '',
       _source: {
-        levar_user_account_id: "88daf445-5f85-4f11-b9af-908b328be987",
+        levar_user_account_id: "9a219350-f35b-4284-9a00-2cceae2bf262",
         image_url: {},
-        product_id:'',
-        custom_asset_status: false,
-        asset_stage: 0,
-        inventory_management: 'custom',
-      }
+      },
+      custom_asset_status: false,
+      asset_stage: 0,
+      inventory_management: 'custom',
     }
 
     let variantId = uniqid('','-varID');
